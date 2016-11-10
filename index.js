@@ -139,12 +139,6 @@
     return dest
   }
 
- function getShallowProperty(obj, prop) {
-    if ((typeof prop === 'number' && Array.isArray(obj)) || _hasOwnProperty.call(obj, prop)) {
-      return obj[prop];
-    }
-  } 
-
   var api = {}
   api.set = function set (dest, src, path, value) {
     return changeImmutable(dest, src, path, function (clonedObj, finalPath) {
@@ -229,7 +223,7 @@
     }
 
     var currentPath = getKey(path[0]);
-    var nextObj = getShallowProperty(obj, currentPath);
+    var nextObj = obj[currentPath];
     if (nextObj === void 0) {
       return defaultValue;
     }
